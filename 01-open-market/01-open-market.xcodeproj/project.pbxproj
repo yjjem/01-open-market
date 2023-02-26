@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF7119A629AB5B7A0029A98F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DF7119A529AB5B7A0029A98F /* RxCocoa */; };
 		DF7119A829AB5B7A0029A98F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DF7119A729AB5B7A0029A98F /* RxSwift */; };
+		DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119AD29AB61580029A98F /* HTTPMethod.swift */; };
 		DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */; };
 		DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */; };
 		DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBE29AB54F6000307FF /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF7119AD29AB61580029A98F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF7ECFB729AB54F6000307FF /* 01-open-market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-open-market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,22 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
+		DF7119AB29AB61410029A98F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119AC29AB614C0029A98F /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DF7119AC29AB614C0029A98F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119AD29AB61580029A98F /* HTTPMethod.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		DF7ECFAE29AB54F6000307FF = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +105,7 @@
 			children = (
 				DF7119A029AB58FE0029A98F /* Application */,
 				DF7119A329AB59200029A98F /* Scene */,
+				DF7119AB29AB61410029A98F /* Data */,
 				DF7119A129AB59080029A98F /* Resources */,
 			);
 			path = "01-open-market";
@@ -169,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */,
 				DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */,
 				DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
