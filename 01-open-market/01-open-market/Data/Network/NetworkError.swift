@@ -6,6 +6,8 @@
     
 
 enum NetworkError: Error {
-    // TODO: 에러 추가 및 수정
-    case exampleError
+    case serverProblem
+    case transportError
+    case missingData
+    case decodeError
 }

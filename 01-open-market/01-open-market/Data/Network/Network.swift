@@ -27,7 +27,7 @@ final class Network<Response: Decodable>: Requestable {
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { data, response, error in
             guard error != nil else {
-                handler(.failure(NetworkError.exampleError))
+                handler(.failure(NetworkError.serverProblem))
                 return
             }
         }
