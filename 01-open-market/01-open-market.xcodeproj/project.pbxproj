@@ -10,6 +10,8 @@
 		DF7119A629AB5B7A0029A98F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = DF7119A529AB5B7A0029A98F /* RxCocoa */; };
 		DF7119A829AB5B7A0029A98F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DF7119A729AB5B7A0029A98F /* RxSwift */; };
 		DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119AD29AB61580029A98F /* HTTPMethod.swift */; };
+		DF7119B029AB6C170029A98F /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119AF29AB6C170029A98F /* NetworkProvider.swift */; };
+		DF7119B229ADD18D0029A98F /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */; };
 		DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */; };
 		DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */; };
 		DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBE29AB54F6000307FF /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		DF7119AD29AB61580029A98F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		DF7119AF29AB6C170029A98F /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
 		DF7ECFB729AB54F6000307FF /* 01-open-market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-open-market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +84,8 @@
 			isa = PBXGroup;
 			children = (
 				DF7119AD29AB61580029A98F /* HTTPMethod.swift */,
+				DF7119AF29AB6C170029A98F /* NetworkProvider.swift */,
+				DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -188,10 +194,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF7119B229ADD18D0029A98F /* URLSessionProtocol.swift in Sources */,
 				DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */,
 				DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */,
 				DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
+				DF7119B029AB6C170029A98F /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

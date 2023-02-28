@@ -5,8 +5,6 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
     
 
-import Foundation
-
 enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
