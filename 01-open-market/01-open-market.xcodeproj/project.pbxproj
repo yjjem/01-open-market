@@ -12,6 +12,12 @@
 		DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119AD29AB61580029A98F /* HTTPMethod.swift */; };
 		DF7119B029AB6C170029A98F /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119AF29AB6C170029A98F /* NetworkProvider.swift */; };
 		DF7119B229ADD18D0029A98F /* URLSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */; };
+		DF7119B429AE2FDD0029A98F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B329AE2FDD0029A98F /* Network.swift */; };
+		DF7119B629AE2FE90029A98F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B529AE2FE90029A98F /* NetworkError.swift */; };
+		DF7119B829AE300B0029A98F /* PostNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B729AE300B0029A98F /* PostNetwork.swift */; };
+		DF7119BA29AE30260029A98F /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B929AE30260029A98F /* EndPoint.swift */; };
+		DF7119BC29AE32090029A98F /* HTTPConetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119BB29AE32090029A98F /* HTTPConetentType.swift */; };
+		DF7119C229AE32A50029A98F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119C129AE32A50029A98F /* Post.swift */; };
 		DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */; };
 		DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */; };
 		DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBE29AB54F6000307FF /* ViewController.swift */; };
@@ -23,6 +29,12 @@
 		DF7119AD29AB61580029A98F /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		DF7119AF29AB6C170029A98F /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionProtocol.swift; sourceTree = "<group>"; };
+		DF7119B329AE2FDD0029A98F /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		DF7119B529AE2FE90029A98F /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		DF7119B729AE300B0029A98F /* PostNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetwork.swift; sourceTree = "<group>"; };
+		DF7119B929AE30260029A98F /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		DF7119BB29AE32090029A98F /* HTTPConetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPConetentType.swift; sourceTree = "<group>"; };
+		DF7119C129AE32A50029A98F /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DF7ECFB729AB54F6000307FF /* 01-open-market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-open-market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,11 +95,48 @@
 		DF7119AC29AB614C0029A98F /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				DF7119AD29AB61580029A98F /* HTTPMethod.swift */,
+				DF7119BE29AE32480029A98F /* NetworkAPI */,
 				DF7119AF29AB6C170029A98F /* NetworkProvider.swift */,
-				DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */,
+				DF7119B329AE2FDD0029A98F /* Network.swift */,
+				DF7119B529AE2FE90029A98F /* NetworkError.swift */,
+				DF7119BD29AE32280029A98F /* Utilities */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		DF7119BD29AE32280029A98F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119B129ADD18D0029A98F /* URLSessionProtocol.swift */,
+				DF7119AD29AB61580029A98F /* HTTPMethod.swift */,
+				DF7119BB29AE32090029A98F /* HTTPConetentType.swift */,
+				DF7119B929AE30260029A98F /* EndPoint.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DF7119BE29AE32480029A98F /* NetworkAPI */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119B729AE300B0029A98F /* PostNetwork.swift */,
+			);
+			path = NetworkAPI;
+			sourceTree = "<group>";
+		};
+		DF7119BF29AE32900029A98F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119C029AE329A0029A98F /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		DF7119C029AE329A0029A98F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DF7119C129AE32A50029A98F /* Post.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		DF7ECFAE29AB54F6000307FF = {
@@ -111,6 +160,7 @@
 			children = (
 				DF7119A029AB58FE0029A98F /* Application */,
 				DF7119A329AB59200029A98F /* Scene */,
+				DF7119BF29AE32900029A98F /* Domain */,
 				DF7119AB29AB61410029A98F /* Data */,
 				DF7119A129AB59080029A98F /* Resources */,
 			);
@@ -195,10 +245,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF7119B229ADD18D0029A98F /* URLSessionProtocol.swift in Sources */,
+				DF7119B629AE2FE90029A98F /* NetworkError.swift in Sources */,
+				DF7119BC29AE32090029A98F /* HTTPConetentType.swift in Sources */,
+				DF7119C229AE32A50029A98F /* Post.swift in Sources */,
+				DF7119BA29AE30260029A98F /* EndPoint.swift in Sources */,
 				DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */,
 				DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */,
+				DF7119B829AE300B0029A98F /* PostNetwork.swift in Sources */,
 				DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
+				DF7119B429AE2FDD0029A98F /* Network.swift in Sources */,
 				DF7119B029AB6C170029A98F /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

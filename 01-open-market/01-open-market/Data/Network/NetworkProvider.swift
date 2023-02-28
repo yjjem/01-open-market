@@ -8,12 +8,12 @@
 import Foundation
 
 final class NetworkProvider {
+    enum Hosts {
+        static let market = "https://openmarket.yagom-academy.kr"
+    }
     
-    let session: URLSessionProtocol
-    
-    init(session: URLSessionProtocol = URLSession.shared) {
-        self.session = session
+    func createPostNetwork() -> PostNetwork {
+        let network = Network<Post>(host: Hosts.market)
+        return PostNetwork(network: network)
     }
 }
-
-extension URLSession: URLSessionProtocol { }
