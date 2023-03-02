@@ -14,7 +14,7 @@ final class NetworkProvider {
         self.network = Network()
     }
     
-    func createPostNetwork() -> PostNetwork {
-        return PostNetwork(network: network)
+    func createPostNetwork() -> MarketNetwork {
+        return MarketNetwork(network: network)
     }
 }
