@@ -3,40 +3,52 @@
 //  01-open-market
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
+
 
 import Foundation
 
-final class Network<Response: Decodable>: Requestable {
+final class Network: Requestable {
     private let session: URLSessionProtocol
-    private let host: String
     private let queue: DispatchQueue
     
     init(
-        host: String,
         session: URLSessionProtocol = URLSession.shared,
         queue: DispatchQueue = .global()
     ) {
-        self.host = host
         self.session = session
         self.queue = queue
     }
     
-    func request(endPoint: EndPoint, handler: @escaping (Result<Response, Error>) -> Void) {
-        guard let url = endPoint.url else { return }
+    func request(endPoint: EndPoint, completion: @escaping (Result<Data, NetworkError>) -> Void) {
+        guard let url = endPoint.url else {
+            completion(.failure(.wrongURLFormat))
+            return
+        }
+        print(url)
         let request = URLRequest(url: url)
         let task = session.dataTask(with: request) { data, response, error in
-            guard error != nil else {
-                handler(.failure(NetworkError.serverProblem))
+            guard error == nil else {
+                completion(.failure(.requestFailed))
                 return
             }
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode)
+            else {
+                completion(.failure(.serverProblem))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(.missingData))
+                return
+            }
+            completion(.success(data))
         }
         task.resume()
     }
 }
 
 protocol Requestable {
-    associatedtype Response
-    
-    func request(endPoint: EndPoint, handler: @escaping (Result<Response, Error>) -> Void)
+
+    func request(endPoint: EndPoint, completion: @escaping (Result<Data, NetworkError>) -> Void)
 }
+

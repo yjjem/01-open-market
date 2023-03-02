@@ -6,6 +6,8 @@
     
 
 enum NetworkError: Error {
+    case wrongURLFormat
+    case requestFailed
     case serverProblem
     case transportError
     case missingData

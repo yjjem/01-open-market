@@ -8,12 +8,13 @@
 import Foundation
 
 final class NetworkProvider {
-    enum Hosts {
-        static let market = "https://openmarket.yagom-academy.kr"
+    private let network: Network
+    
+    init() {
+        self.network = Network()
     }
     
     func createPostNetwork() -> PostNetwork {
-        let network = Network<Post>(host: Hosts.market)
         return PostNetwork(network: network)
     }
 }

@@ -8,17 +8,36 @@
 import Foundation
 
 final class PostNetwork {
-    private let network: Network<Post>
+    private let network: Network
+    // TODO: Add Paging manager
+    private var pageNumber: Int = 1
+    private var itemsPerPage: Int = 100
     
-    init(network: Network<Post>) {
+    init(network: Network) {
         self.network = network
     }
     
-    func getProductList(handler: @escaping (Result<Post, Error>) -> Void)  {
-        // TODO: 메서드 구현
+    func retrieveProductList(
+        searchValue: String? = nil,
+        completion: @escaping (Result<Data, NetworkError>) -> Void
+    )  {
+        let endPoint = EndPoint(
+            parameters: .productList(
+                pageNumber: pageNumber,
+                itemsPerPage: itemsPerPage,
+                searchValue: searchValue
+            )
+        )
+        network.request(endPoint: endPoint, completion: completion)
     }
     
-    func getProductDetails(handler: @escaping (Result<Post, Error>) -> Void) {
-        // TODO: 메서드 구현, Response 타입 추가 및 수정
+    func retrieveProductDetails(
+        productIdentifier: Int,
+        completion: @escaping (Result<Data, NetworkError>) -> Void
+    ) {
+        let endPoint = EndPoint(
+            parameters: .productDetails(productIdentifier: productIdentifier)
+        )
+        network.request(endPoint: endPoint, completion: completion)
     }
 }
