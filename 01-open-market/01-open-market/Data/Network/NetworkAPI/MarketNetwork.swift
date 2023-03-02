@@ -1,5 +1,5 @@
 //
-//  PostNetwork.swift
+//  MarketNetwork.swift
 //  01-open-market
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PostNetwork {
+final class MarketNetwork {
     private let network: Network
     // TODO: Add Paging manager
     private var pageNumber: Int = 1
