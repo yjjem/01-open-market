@@ -17,6 +17,11 @@
 		DF7119B829AE300B0029A98F /* PostNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B729AE300B0029A98F /* PostNetwork.swift */; };
 		DF7119BA29AE30260029A98F /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119B929AE30260029A98F /* EndPoint.swift */; };
 		DF7119BC29AE32090029A98F /* HTTPConetentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7119BB29AE32090029A98F /* HTTPConetentType.swift */; };
+		DF7B365729B0AC2500348FFB /* ProductList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365629B0AC2500348FFB /* ProductList.swift */; };
+		DF7B365929B0AC3F00348FFB /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365829B0AC3F00348FFB /* Product.swift */; };
+		DF7B365B29B0AC7800348FFB /* Vendor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365A29B0AC7800348FFB /* Vendor.swift */; };
+		DF7B365D29B0AC8700348FFB /* ProductImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365C29B0AC8700348FFB /* ProductImage.swift */; };
+		DF7B365F29B0ACA900348FFB /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365E29B0ACA900348FFB /* Currency.swift */; };
 		DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */; };
 		DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */; };
 		DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBE29AB54F6000307FF /* ViewController.swift */; };
@@ -33,6 +38,11 @@
 		DF7119B729AE300B0029A98F /* PostNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostNetwork.swift; sourceTree = "<group>"; };
 		DF7119B929AE30260029A98F /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		DF7119BB29AE32090029A98F /* HTTPConetentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPConetentType.swift; sourceTree = "<group>"; };
+		DF7B365629B0AC2500348FFB /* ProductList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductList.swift; sourceTree = "<group>"; };
+		DF7B365829B0AC3F00348FFB /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		DF7B365A29B0AC7800348FFB /* Vendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vendor.swift; sourceTree = "<group>"; };
+		DF7B365C29B0AC8700348FFB /* ProductImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImage.swift; sourceTree = "<group>"; };
+		DF7B365E29B0ACA900348FFB /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		DF7ECFB729AB54F6000307FF /* 01-open-market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-open-market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +142,11 @@
 		DF7119C029AE329A0029A98F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				DF7B365629B0AC2500348FFB /* ProductList.swift */,
+				DF7B365829B0AC3F00348FFB /* Product.swift */,
+				DF7B365A29B0AC7800348FFB /* Vendor.swift */,
+				DF7B365C29B0AC8700348FFB /* ProductImage.swift */,
+				DF7B365E29B0ACA900348FFB /* Currency.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -242,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF7119B229ADD18D0029A98F /* URLSessionProtocol.swift in Sources */,
+				DF7B365B29B0AC7800348FFB /* Vendor.swift in Sources */,
 				DF7119B629AE2FE90029A98F /* NetworkError.swift in Sources */,
 				DF7119BC29AE32090029A98F /* HTTPConetentType.swift in Sources */,
 				DF7119BA29AE30260029A98F /* EndPoint.swift in Sources */,
@@ -249,9 +265,13 @@
 				DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */,
 				DF7119B829AE300B0029A98F /* PostNetwork.swift in Sources */,
 				DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */,
+				DF7B365F29B0ACA900348FFB /* Currency.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
+				DF7B365729B0AC2500348FFB /* ProductList.swift in Sources */,
+				DF7B365D29B0AC8700348FFB /* ProductImage.swift in Sources */,
 				DF7119B429AE2FDD0029A98F /* Network.swift in Sources */,
 				DF7119B029AB6C170029A98F /* NetworkProvider.swift in Sources */,
+				DF7B365929B0AC3F00348FFB /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
