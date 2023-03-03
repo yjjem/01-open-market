@@ -23,11 +23,15 @@
 		DF7B365F29B0ACA900348FFB /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7B365E29B0ACA900348FFB /* Currency.swift */; };
 		DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */; };
 		DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */; };
-		DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7ECFBE29AB54F6000307FF /* ViewController.swift */; };
 		DF7ECFC429AB54F6000307FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF7ECFC329AB54F6000307FF /* Assets.xcassets */; };
 		DF7ECFC729AB54F6000307FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DF7ECFC529AB54F6000307FF /* LaunchScreen.storyboard */; };
 		DF8ADC1729B1F49A00A2BC5F /* ProductsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC1629B1F49A00A2BC5F /* ProductsUseCase.swift */; };
 		DF8ADC1A29B1F53E00A2BC5F /* MarketRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC1929B1F53E00A2BC5F /* MarketRepositoryType.swift */; };
+		DF8ADC3329B27EE500A2BC5F /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC2D29B27EE500A2BC5F /* ProductCell.swift */; };
+		DF8ADC3429B27EE500A2BC5F /* ProductListCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC2E29B27EE500A2BC5F /* ProductListCollectionView.swift */; };
+		DF8ADC3529B27EE500A2BC5F /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC2F29B27EE500A2BC5F /* ProductListViewController.swift */; };
+		DF8ADC3629B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC3129B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift */; };
+		DF8ADC3729B27EE500A2BC5F /* UIImage + resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC3229B27EE500A2BC5F /* UIImage + resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,12 +50,16 @@
 		DF7ECFB729AB54F6000307FF /* 01-open-market.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-open-market.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF7ECFBA29AB54F6000307FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DF7ECFBC29AB54F6000307FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DF7ECFBE29AB54F6000307FF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DF7ECFC329AB54F6000307FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DF7ECFC629AB54F6000307FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DF7ECFC829AB54F6000307FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF8ADC1629B1F49A00A2BC5F /* ProductsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsUseCase.swift; sourceTree = "<group>"; };
 		DF8ADC1929B1F53E00A2BC5F /* MarketRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketRepositoryType.swift; sourceTree = "<group>"; };
+		DF8ADC2D29B27EE500A2BC5F /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		DF8ADC2E29B27EE500A2BC5F /* ProductListCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListCollectionView.swift; sourceTree = "<group>"; };
+		DF8ADC2F29B27EE500A2BC5F /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		DF8ADC3129B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView + addMultipleArrangedSubviews.swift"; sourceTree = "<group>"; };
+		DF8ADC3229B27EE500A2BC5F /* UIImage + resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage + resize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,14 +92,6 @@
 				DF7ECFC829AB54F6000307FF /* Info.plist */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		DF7119A329AB59200029A98F /* Scene */ = {
-			isa = PBXGroup;
-			children = (
-				DF7ECFBE29AB54F6000307FF /* ViewController.swift */,
-			);
-			path = Scene;
 			sourceTree = "<group>";
 		};
 		DF7119AB29AB61410029A98F /* Data */ = {
@@ -174,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				DF7119A029AB58FE0029A98F /* Application */,
-				DF7119A329AB59200029A98F /* Scene */,
+				DF8ADC2B29B27EE500A2BC5F /* Presentation */,
 				DF7119BF29AE32900029A98F /* Domain */,
 				DF7119AB29AB61410029A98F /* Data */,
 				DF7119A129AB59080029A98F /* Resources */,
@@ -196,6 +196,35 @@
 				DF8ADC1929B1F53E00A2BC5F /* MarketRepositoryType.swift */,
 			);
 			path = RepositoryInterface;
+			sourceTree = "<group>";
+		};
+		DF8ADC2B29B27EE500A2BC5F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				DF8ADC3029B27EE500A2BC5F /* Common */,
+				DF8ADC2C29B27EE500A2BC5F /* ProductListScene */,
+			);
+			name = Presentation;
+			path = "01-open-market/Presentation";
+			sourceTree = SOURCE_ROOT;
+		};
+		DF8ADC2C29B27EE500A2BC5F /* ProductListScene */ = {
+			isa = PBXGroup;
+			children = (
+				DF8ADC2D29B27EE500A2BC5F /* ProductCell.swift */,
+				DF8ADC2E29B27EE500A2BC5F /* ProductListCollectionView.swift */,
+				DF8ADC2F29B27EE500A2BC5F /* ProductListViewController.swift */,
+			);
+			path = ProductListScene;
+			sourceTree = "<group>";
+		};
+		DF8ADC3029B27EE500A2BC5F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DF8ADC3129B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift */,
+				DF8ADC3229B27EE500A2BC5F /* UIImage + resize.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,15 +308,19 @@
 				DF7B365B29B0AC7800348FFB /* Vendor.swift in Sources */,
 				DF7119B629AE2FE90029A98F /* NetworkError.swift in Sources */,
 				DF7119BC29AE32090029A98F /* HTTPConetentType.swift in Sources */,
+				DF8ADC3729B27EE500A2BC5F /* UIImage + resize.swift in Sources */,
 				DF7119BA29AE30260029A98F /* EndPoint.swift in Sources */,
 				DF7119AE29AB61580029A98F /* HTTPMethod.swift in Sources */,
 				DF8ADC1A29B1F53E00A2BC5F /* MarketRepositoryType.swift in Sources */,
-				DF7ECFBF29AB54F6000307FF /* ViewController.swift in Sources */,
 				DF7119B829AE300B0029A98F /* MarketRepository.swift in Sources */,
 				DF7ECFBB29AB54F6000307FF /* AppDelegate.swift in Sources */,
+				DF8ADC3629B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift in Sources */,
 				DF7B365F29B0ACA900348FFB /* Currency.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
+				DF8ADC3529B27EE500A2BC5F /* ProductListViewController.swift in Sources */,
 				DF7B365729B0AC2500348FFB /* ProductList.swift in Sources */,
+				DF8ADC3429B27EE500A2BC5F /* ProductListCollectionView.swift in Sources */,
+				DF8ADC3329B27EE500A2BC5F /* ProductCell.swift in Sources */,
 				DF7B365D29B0AC8700348FFB /* ProductImage.swift in Sources */,
 				DF8ADC1729B1F49A00A2BC5F /* ProductsUseCase.swift in Sources */,
 				DF7119B429AE2FDD0029A98F /* NetworkManager.swift in Sources */,
