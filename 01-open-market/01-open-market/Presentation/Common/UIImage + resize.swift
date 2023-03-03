@@ -8,10 +8,11 @@
 import UIKit
 
 extension UIImage {
-    func resize(to targetSize: CGSize) -> UIImage? {
-        let render = UIGraphicsImageRenderer(size: targetSize)
+    func resize(width: CGFloat, height: CGFloat) -> UIImage? {
+        let size = CGSize(width: width, height: height)
+        let render = UIGraphicsImageRenderer(size: size)
         return render.image { ctx in
-            self.draw(in: .init(origin: .zero, size: targetSize))
+            self.draw(in: .init(origin: .zero, size: size))
         }
     }
 }
