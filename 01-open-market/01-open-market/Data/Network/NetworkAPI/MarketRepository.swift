@@ -1,26 +1,24 @@
 //
-//  MarketNetwork.swift
+//  MarketRepository.swift
 //  01-open-market
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
     
 
 import Foundation
+import RxSwift
 
-final class MarketNetwork {
-    private let network: Network
+final class MarketRepository: MarketRepositoryType {
+    private let network: NetworkManager
     // TODO: Add Paging manager
     private var pageNumber: Int = 1
     private var itemsPerPage: Int = 100
     
-    init(network: Network) {
+    init(network: NetworkManager) {
         self.network = network
     }
     
-    func retrieveProductList(
-        searchValue: String? = nil,
-        completion: @escaping (Result<Data, NetworkError>) -> Void
-    )  {
+    func retrieveItems(searchValue: String? = nil) -> Observable<Data> {
         let endPoint = EndPoint(
             parameters: .productList(
                 pageNumber: pageNumber,
@@ -28,16 +26,13 @@ final class MarketNetwork {
                 searchValue: searchValue
             )
         )
-        network.request(endPoint: endPoint, completion: completion)
+        return network.request(endPoint: endPoint)
     }
     
-    func retrieveProductDetails(
-        productIdentifier: Int,
-        completion: @escaping (Result<Data, NetworkError>) -> Void
-    ) {
-        let endPoint = EndPoint(
+    func retrieveItem(productIdentifier: Int) -> Observable<Data> {
+        let endPoint: EndPoint = EndPoint(
             parameters: .productDetails(productIdentifier: productIdentifier)
         )
-        network.request(endPoint: endPoint, completion: completion)
+        return network.request(endPoint: endPoint)
     }
 }
