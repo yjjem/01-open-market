@@ -17,7 +17,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let service = MarketService()
+        let useCase = ProductListUseCase(service: service)
+        let viewModel = ProductListViewModel(useCase: useCase)
         let rootViewController = ProductListViewController()
+        rootViewController.viewModel = viewModel
         let rootNavigationViewController = UINavigationController(
             rootViewController: rootViewController
         )

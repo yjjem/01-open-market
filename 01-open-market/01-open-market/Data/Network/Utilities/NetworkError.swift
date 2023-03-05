@@ -11,5 +11,5 @@ enum NetworkError: Error {
     case serverProblem
     case transportError
     case missingData
-    case decodeError
+    case decodeFailed
 }

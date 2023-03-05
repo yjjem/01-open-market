@@ -18,7 +18,7 @@ final class ProductCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = .preferredFont(forTextStyle: .headline)
         label.adjustsFontForContentSizeCategory = true
         return label
@@ -26,19 +26,25 @@ final class ProductCell: UICollectionViewCell {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = .systemGray2
+        label.textAlignment = .left
         return label
     }()
     private let stockLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     private let labelsStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
+        stackView.layoutMargins = UIEdgeInsets(
+            top: 20,
+            left: 10,
+            bottom: 20,
+            right: 10
+        )
+        stackView.isLayoutMarginsRelativeArrangement = true
         return stackView
     }()
     private let totalStackView: UIStackView = {
@@ -54,27 +60,32 @@ final class ProductCell: UICollectionViewCell {
         combineViews()
         configureLayout()
         configureViewStyles()
-        
-        
-        // TODO: Remove
-        nameLabel.text = "CookieDog"
-        stockLabel.text = "10"
-        priceLabel.text = "100000.0$"
-        imageView.image = UIImage(named: "cookieDog")?.resize(width: 50, height: 50)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepareForReuse() {
         imageView.image = nil
+        nameLabel.text = nil
+        priceLabel.text = nil
+        stockLabel.text = nil
+    }
+
+    // MARK: Function(s)
+    
+    func setUpWith(product: Product) {
+        imageView.setImage(with: product.thumbnail)
+        nameLabel.text = product.name
+        priceLabel.text = "가격: \(String(product.price)) \(product.currency.rawValue)"
+        stockLabel.text = "수량: \(String(product.stock))"
     }
     
     // MARK: Privat Function(s)
     
     private func configureViewStyles() {
-        contentView.backgroundColor = .systemFill
+        contentView.backgroundColor = .tertiarySystemFill
         contentView.layer.cornerRadius = 15
     }
     
@@ -110,7 +121,7 @@ final class ProductCell: UICollectionViewCell {
                     equalTo: contentView.bottomAnchor,
                     constant: -10
                 ),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor)
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
         ])
     }
 }
