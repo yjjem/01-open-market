@@ -39,10 +39,6 @@ final class ProductListViewController: UIViewController {
         configureNavigationItems()
         configureCollectionView()
         bindViewModel()
-        let refreshControl  = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(startRefreshControl), for: .valueChanged)
-        productsCollectionView.refreshControl = refreshControl
-        
     }
     
     // Private Function(s)
@@ -58,7 +54,8 @@ final class ProductListViewController: UIViewController {
             reloadButtonTrigger,
             viewWillAppearTrigger,
             refreshControlTrigger
-        ).merge()
+        )
+            .merge()
             .map { _ in }
             .asObservable()
         
@@ -85,6 +82,13 @@ final class ProductListViewController: UIViewController {
         combineViews()
         configureConstraints()
         initializeDataSource()
+        configureCollectionViewRefreshControl()
+    }
+    
+    private func configureCollectionViewRefreshControl() {
+        let refreshControl  = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(startRefreshControl), for: .valueChanged)
+        productsCollectionView.refreshControl = refreshControl
     }
     
     private func updateSnapShot(with data: [Product]) {
