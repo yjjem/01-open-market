@@ -9,5 +9,5 @@ import Foundation
 import RxSwift
 
 protocol MarketServiceType {
-    func retrieveProductList(reload: Bool) -> Observable<ProductList>
+    func retrieveProductsData(reload: Bool) -> Observable<[Product]>
 }

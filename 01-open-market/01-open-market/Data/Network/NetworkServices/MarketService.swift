@@ -16,7 +16,7 @@ final class MarketService: MarketServiceType {
         self.network = network
     }
     
-    func retrieveProductList(reload: Bool = false) -> Observable<ProductList> {
+    func retrieveProductsData(reload: Bool = false) -> Observable<[Product]> {
         if reload {
             pagingManager.resetPage()
         }
@@ -25,7 +25,7 @@ final class MarketService: MarketServiceType {
             let task = self?.network.request(parameters: parameters) { response in
                 switch response {
                 case .success(let data):
-                    emitter.onNext(data)
+                    emitter.onNext(data.asProducts())
                 case .failure(let error):
                     emitter.onError(error)
                 }

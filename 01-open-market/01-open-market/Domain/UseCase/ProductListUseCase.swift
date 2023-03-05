@@ -22,16 +22,16 @@ final class ProductListUseCase: ProductListUseCaseType {
     }
     
     func retrieveProductList() -> Observable<[Product]> {
-        return service.retrieveProductList(reload: false)
+        return service.retrieveProductsData(reload: false)
             .flatMap { list in
-                Observable.just(list.pages)
+                Observable.just(list)
             }
     }
 
     func reloadProductList() -> Observable<[Product]> {
-        return service.retrieveProductList(reload: true)
+        return service.retrieveProductsData(reload: true)
             .flatMap { list in
-                Observable.just(list.pages)
+                Observable.just(list)
             }
     }
 }
