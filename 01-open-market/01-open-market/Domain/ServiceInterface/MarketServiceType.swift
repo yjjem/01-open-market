@@ -9,8 +9,5 @@ import Foundation
 import RxSwift
 
 protocol MarketServiceType {
-    func retrieveProductList(
-        parameters: ProductListRequest,
-        completion: @escaping (Result<ProductList, NetworkError>) -> Void
-    ) -> URLSessionDataTask?
+    func retrieveProductList(reload: Bool) -> Observable<ProductList>
 }

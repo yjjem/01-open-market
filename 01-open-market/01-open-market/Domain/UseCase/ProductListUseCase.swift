@@ -15,21 +15,21 @@ protocol ProductListUseCaseType {
 
 final class ProductListUseCase: ProductListUseCaseType {
     
-    let repository: ProductListRepositoryType
+    let service: MarketServiceType
     
-    init(repository: ProductListRepositoryType) {
-        self.repository = repository
+    init(service: MarketServiceType) {
+        self.service = service
     }
     
     func retrieveProductList() -> Observable<[Product]> {
-        return repository.retrieveProductList(reload: false)
+        return service.retrieveProductList(reload: false)
             .flatMap { list in
                 Observable.just(list.pages)
             }
     }
-    
+
     func reloadProductList() -> Observable<[Product]> {
-        return repository.retrieveProductList(reload: true)
+        return service.retrieveProductList(reload: true)
             .flatMap { list in
                 Observable.just(list.pages)
             }

@@ -19,8 +19,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let service = MarketService()
-        let repository = ProductListRepository(networkService: service)
-        let useCase = ProductListUseCase(repository: repository)
+        let useCase = ProductListUseCase(service: service)
         let viewModel = ProductListViewModel(useCase: useCase)
         let rootViewController = ProductListViewController()
         rootViewController.viewModel = viewModel

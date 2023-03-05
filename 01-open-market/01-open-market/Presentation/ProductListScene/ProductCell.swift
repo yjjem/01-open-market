@@ -76,16 +76,7 @@ final class ProductCell: UICollectionViewCell {
     // MARK: Function(s)
     
     func setUpWith(product: Product) {
-        DispatchQueue.global().async {
-            guard let url = URL(string: product.thumbnail),
-            let data = try? Data(contentsOf: url)
-            else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: data)
-            }
-        }
+        imageView.setImage(with: product.thumbnail)
         nameLabel.text = product.name
         priceLabel.text = "가격: \(String(product.price)) \(product.currency.rawValue)"
         stockLabel.text = "수량: \(String(product.stock))"
