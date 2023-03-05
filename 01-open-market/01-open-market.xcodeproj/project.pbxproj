@@ -81,6 +81,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF5231E629B49BBC00D80BE2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DF8ADC2D29B27EE500A2BC5F /* ProductCell.swift */,
+				DF8ADC2E29B27EE500A2BC5F /* ProductListCollectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DF7119A029AB58FE0029A98F /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,12 +160,12 @@
 		DF7119C029AE329A0029A98F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				DF5231E429B49A7E00D80BE2 /* Entities + Mapping.swift */,
 				DF7B365629B0AC2500348FFB /* ProductList.swift */,
 				DF7B365829B0AC3F00348FFB /* Product.swift */,
 				DF7B365A29B0AC7800348FFB /* Vendor.swift */,
 				DF7B365C29B0AC8700348FFB /* ProductImage.swift */,
 				DF7B365E29B0ACA900348FFB /* Currency.swift */,
-				DF5231E429B49A7E00D80BE2 /* Entities + Mapping.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -218,8 +227,7 @@
 		DF8ADC2C29B27EE500A2BC5F /* ProductListScene */ = {
 			isa = PBXGroup;
 			children = (
-				DF8ADC2D29B27EE500A2BC5F /* ProductCell.swift */,
-				DF8ADC2E29B27EE500A2BC5F /* ProductListCollectionView.swift */,
+				DF5231E629B49BBC00D80BE2 /* Views */,
 				DF8ADC2F29B27EE500A2BC5F /* ProductListViewController.swift */,
 				DF8ADC4129B36ED600A2BC5F /* ProductListViewModel.swift */,
 			);
