@@ -5,8 +5,8 @@
 //  Copyright (c) 2023 Jeremy All rights reserved.
 
 
-import Foundation
 import RxSwift
+import UIKit
 
 final class ProductDetailsViewModel: ViewModelType {
     enum Style {
@@ -16,6 +16,7 @@ final class ProductDetailsViewModel: ViewModelType {
     
     private let useCase: ProductListUseCaseType?
     private var productToEdit: PostProduct?
+    var images: [UIImage] = []
     var presentingStyle: Style = .post
     
     init(presentingStyle: Style = .post, useCase: ProductListUseCaseType) {
@@ -48,14 +49,7 @@ final class ProductDetailsViewModel: ViewModelType {
         switch presentingStyle {
         case .edit(let product):
             productToEdit = product
-        case .post:
-            productToEdit = PostProduct(
-                name: "",
-                price: 0,
-                discount: 0,
-                currency: .KRW,
-                stock: 0
-            )
+        case .post: return
         }
     }
 }

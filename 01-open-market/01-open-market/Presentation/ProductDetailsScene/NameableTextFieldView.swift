@@ -40,10 +40,13 @@ final class NameableTextFieldView: UIView {
     
     // MARK: Initialization
     
-    init(name: String) {
+    init(name: String, placeHolder: String? = nil) {
         super.init(frame: .init())
         self.nameLabel.text = name
         textField.isEnabled = isEditable
+        if let placeHolder = placeHolder {
+            textField.placeholder = placeHolder
+        }
         performViewConfiguration()
     }
     

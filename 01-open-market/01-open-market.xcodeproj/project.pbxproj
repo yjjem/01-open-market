@@ -40,6 +40,7 @@
 		DF8ADC4229B36ED600A2BC5F /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8ADC4129B36ED600A2BC5F /* ProductListViewModel.swift */; };
 		DF9533D329B76E50005AC42E /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9533D229B76E50005AC42E /* ProductCellViewModel.swift */; };
 		DF9533D529B7833F005AC42E /* NameableTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9533D429B7833F005AC42E /* NameableTextFieldView.swift */; };
+		DF9533D729B885D1005AC42E /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF9533D629B885D1005AC42E /* ProductImageCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		DF8ADC4129B36ED600A2BC5F /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		DF9533D229B76E50005AC42E /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		DF9533D429B7833F005AC42E /* NameableTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameableTextFieldView.swift; sourceTree = "<group>"; };
+		DF9533D629B885D1005AC42E /* ProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		DF5231E729B4A14A00D80BE2 /* ProductDetailsScene */ = {
 			isa = PBXGroup;
 			children = (
+				DF9533D629B885D1005AC42E /* ProductImageCell.swift */,
 				DF9533D429B7833F005AC42E /* NameableTextFieldView.swift */,
 				DF5231EA29B5A11A00D80BE2 /* ProductDetailsViewModel.swift */,
 				DF5231E829B4A16D00D80BE2 /* ProductDetailsViewController.swift */,
@@ -361,6 +364,7 @@
 				DF8ADC3629B27EE500A2BC5F /* UIStackView + addMultipleArrangedSubviews.swift in Sources */,
 				DF7B365F29B0ACA900348FFB /* Currency.swift in Sources */,
 				DF7ECFBD29AB54F6000307FF /* SceneDelegate.swift in Sources */,
+				DF9533D729B885D1005AC42E /* ProductImageCell.swift in Sources */,
 				DF8ADC3529B27EE500A2BC5F /* ProductListViewController.swift in Sources */,
 				DF5231EB29B5A11A00D80BE2 /* ProductDetailsViewModel.swift in Sources */,
 				DF7B365729B0AC2500348FFB /* ProductListResponse.swift in Sources */,

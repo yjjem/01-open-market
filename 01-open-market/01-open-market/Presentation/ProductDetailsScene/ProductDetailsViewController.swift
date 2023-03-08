@@ -15,28 +15,39 @@ final class ProductDetailsViewController: UIViewController {
     }
     
     // MARK: View(s)
+    private let imagePicker: UIImagePickerController = {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        return picker
+    }()
     
-    private let productImagesView: UIView = {
-        let collectionView: UIView = UIView()
-        collectionView.backgroundColor = .systemOrange
+    private let productImagesCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
     private let productNameView: NameableTextFieldView = {
-        let nameableTextView = NameableTextFieldView(name: "Name")
+        let nameableTextView = NameableTextFieldView(name: "Name", placeHolder: "상품 이름")
         return nameableTextView
     }()
     private let priceNameView: NameableTextFieldView = {
-        let nameableTextView = NameableTextFieldView(name: "Price")
+        let nameableTextView = NameableTextFieldView(name: "Price", placeHolder: "상품 가격")
         return nameableTextView
     }()
     private let discountNameView: NameableTextFieldView = {
-        let nameableTextView = NameableTextFieldView(name: "Discount")
+        let nameableTextView = NameableTextFieldView(name: "Discount", placeHolder: "상품 할인 가격")
         return nameableTextView
     }()
     private let stockNameView: NameableTextFieldView = {
-        let nameableTextView = NameableTextFieldView(name: "Stock")
+        let nameableTextView = NameableTextFieldView(name: "Stock", placeHolder: "상품 재고 수량")
         return nameableTextView
     }()
     
@@ -81,8 +92,8 @@ final class ProductDetailsViewController: UIViewController {
     }()
     
     private let disposeBag = DisposeBag()
+    private var selectedImages: [UIImage] = []
     var viewModel: ProductDetailsViewModel?
-    
     
     // MARK: Override(s)
     
@@ -95,6 +106,13 @@ final class ProductDetailsViewController: UIViewController {
         configureNavigationItems()
         configureInitialProductEditability()
         bindViewModel()
+        productImagesCollectionView.register(
+            ProductImageCell.self,
+            forCellWithReuseIdentifier: "cell"
+        )
+        productImagesCollectionView.delegate = self
+        productImagesCollectionView.dataSource = self
+        imagePicker.delegate = self
     }
     
     // MARK: Private Function(s)
@@ -120,10 +138,9 @@ final class ProductDetailsViewController: UIViewController {
         let doneTrigger = self.rx.methodInvoked(#selector(didTapDoneButton))
             .map { _ in }
             .asObservable()
-        let editTrigger = self.rx.methodInvoked(#selector(didTapEditbutton))
+        let editTrigger = self.rx.methodInvoked(#selector(didTapEditButton))
             .map { _ in }
             .asObservable()
-        
         
         let output = viewModel.transform(
             input: .init(
@@ -184,9 +201,8 @@ final class ProductDetailsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
     @objc
-    private func didTapEditbutton() {
+    private func didTapEditButton() {
         configureProductEditMode(isEditable: true)
         navigationItem.rightBarButtonItem = createDoneButton()
     }
@@ -196,7 +212,7 @@ final class ProductDetailsViewController: UIViewController {
         let editButton = UIBarButtonItem(
             barButtonSystemItem: .edit,
             target: self,
-            action: #selector(didTapEditbutton)
+            action: #selector(didTapEditButton)
         )
         switch viewModel.presentingStyle {
         case .edit(product: let product):
@@ -222,7 +238,7 @@ final class ProductDetailsViewController: UIViewController {
         ]
         priceStackView.addMultipleArrangedSubviews(productPriceViews)
         detailDataStackView.addMultipleArrangedSubviews(productDetailsViews)
-        view.addSubview(productImagesView)
+        view.addSubview(productImagesCollectionView)
         view.addSubview(detailDataStackView)
         view.addSubview(productDescriptionTextView)
     }
@@ -230,16 +246,16 @@ final class ProductDetailsViewController: UIViewController {
     private func configureViewConstraints() {
         
         NSLayoutConstraint.activate([
-            productImagesView.topAnchor
+            productImagesCollectionView.topAnchor
                 .constraint(
                     equalTo: view.safeAreaLayoutGuide.topAnchor
                 ),
-            productImagesView.heightAnchor
+            productImagesCollectionView.heightAnchor
                 .constraint(
                     equalTo: view.heightAnchor,
                     multiplier: 0.2
                 ),
-            productImagesView.widthAnchor
+            productImagesCollectionView.widthAnchor
                 .constraint(
                     equalTo: view.widthAnchor
                 ),
@@ -248,7 +264,7 @@ final class ProductDetailsViewController: UIViewController {
         NSLayoutConstraint.activate([
             detailDataStackView.topAnchor
                 .constraint(
-                    equalTo: productImagesView.bottomAnchor
+                    equalTo: productImagesCollectionView.bottomAnchor
                 ),
             detailDataStackView.heightAnchor
                 .constraint(
@@ -305,5 +321,96 @@ final class ProductDetailsViewController: UIViewController {
                     multiplier: 0.25
                 ),
         ])
+    }
+}
+
+extension ProductDetailsViewController: UICollectionViewDataSource {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
+        return 1 + selectedImages.count
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "cell",
+            for: indexPath
+        ) as? ProductImageCell else {
+            return UICollectionViewCell()
+        }
+        
+        if indexPath.item == 0 {
+            cell.backgroundColor = .systemRed
+            cell.imageView.image = UIImage(named: "noImage")
+            return cell
+        }
+        
+        cell.backgroundColor = .systemGray5
+        cell.imageView.image = selectedImages[indexPath.item - 1]
+        
+        return cell
+    }
+}
+
+extension ProductDetailsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 0 {
+            present(imagePicker, animated: true)
+        }
+    }
+}
+
+extension ProductDetailsViewController: UIImagePickerControllerDelegate,
+                                            UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectedImages.append(editedImage)
+            viewModel?.images.append(editedImage)
+            productImagesCollectionView.reloadData()
+        }
+        
+        picker.dismiss(animated: true)
+    }
+}
+
+extension ProductDetailsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        let width: CGFloat = view.bounds.width * 0.3
+        let height: CGFloat = width
+        
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        return UIEdgeInsets(
+            top: 10,
+            left: 10,
+            bottom: 10,
+            right: 10
+        )
+    }
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return 12
     }
 }
