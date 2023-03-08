@@ -34,7 +34,7 @@ extension Requestable {
 }
 
 struct ProductListRequest: Requestable {
-    typealias Response = ProductList
+    typealias Response = ProductListResponse
     
     let pageNumber: Int
     let searchValue: String? = nil

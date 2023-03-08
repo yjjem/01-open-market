@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 
 protocol ProductListUseCaseType {
-    func retrieveProductList() -> Observable<[Product]>
-    func reloadProductList() -> Observable<[Product]>
+    func retrieveProductList() -> Observable<[ProductResponse]>
+    func reloadProductList() -> Observable<[ProductResponse]>
 }
 
 final class ProductListUseCase: ProductListUseCaseType {
@@ -21,14 +21,14 @@ final class ProductListUseCase: ProductListUseCaseType {
         self.service = service
     }
     
-    func retrieveProductList() -> Observable<[Product]> {
+    func retrieveProductList() -> Observable<[ProductResponse]> {
         return service.retrieveProductsData(reload: false)
             .flatMap { list in
                 Observable.just(list)
             }
     }
 
-    func reloadProductList() -> Observable<[Product]> {
+    func reloadProductList() -> Observable<[ProductResponse]> {
         return service.retrieveProductsData(reload: true)
             .flatMap { list in
                 Observable.just(list)

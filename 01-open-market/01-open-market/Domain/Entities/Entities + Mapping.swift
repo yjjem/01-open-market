@@ -7,8 +7,31 @@
 
 import Foundation
 
-extension ProductList {
-    func asProducts() -> [Product] {
+extension ProductListResponse {
+    func asProducts() -> [ProductResponse] {
         return self.pages
+    }
+}
+
+extension ProductResponse {
+    func asPostProduct() -> PostProduct {
+        return PostProduct(
+            name: self.name,
+            price: self.price,
+            discount: self.discountedPrice,
+            currency: self.currency,
+            stock: self.stock
+        )
+    }
+    
+    func asProductCellViewModel() -> ProductCellViewModel {
+        return ProductCellViewModel(
+            name: self.name,
+            price: self.price,
+            discount: self.discountedPrice,
+            currency: self.currency,
+            stock: self.stock,
+            thumbnail: self.thumbnail
+        )
     }
 }

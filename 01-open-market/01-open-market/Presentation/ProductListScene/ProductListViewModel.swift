@@ -32,6 +32,6 @@ extension ProductListViewModel {
         let reloadTrigger: Observable<Void>
     }
     struct Output {
-        let reloadResponse: Observable<[Product]>
+        let reloadResponse: Observable<[ProductResponse]>
     }
 }

@@ -16,7 +16,7 @@ final class MarketService: MarketServiceType {
         self.network = network
     }
     
-    func retrieveProductsData(reload: Bool = false) -> Observable<[Product]> {
+    func retrieveProductsData(reload: Bool = false) -> Observable<[ProductResponse]> {
         if reload {
             pagingManager.resetPage()
         }

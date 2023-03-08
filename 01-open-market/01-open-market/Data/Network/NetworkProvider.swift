@@ -7,7 +7,14 @@
 
 import Foundation
 
-final class NetworkProvider {
+protocol RequestProvidable {
+    func request<P: Requestable>(
+        parameters: P,
+        completion: @escaping ((Result<P.Response, NetworkError>) -> Void)
+    ) -> URLSessionDataTask?
+}
+
+final class NetworkProvider: RequestProvidable {
     private let session: URLSession
     private let queue: DispatchQueue
     
