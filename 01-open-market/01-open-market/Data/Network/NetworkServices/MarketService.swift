@@ -26,6 +26,7 @@ final class MarketService: MarketServiceType {
                 switch response {
                 case .success(let data):
                     emitter.onNext(data.asProducts())
+                    self?.pagingManager.addPage()
                 case .failure(let error):
                     emitter.onError(error)
                 }

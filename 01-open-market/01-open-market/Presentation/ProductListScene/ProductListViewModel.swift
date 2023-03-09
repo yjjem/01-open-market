@@ -21,8 +21,15 @@ final class ProductListViewModel: ViewModelType {
             .flatMap {
                 return self.useCase.reloadProductList()
             }
+        
+        let paging = input.pagingTrigger
+            .flatMap {
+                return self.useCase.retrieveProductList()
+            }
+        
         return Output(
-            reloadResponse: reload
+            reloadResponse: reload,
+            pagingResponse: paging
         )
     }
 }
@@ -30,8 +37,10 @@ final class ProductListViewModel: ViewModelType {
 extension ProductListViewModel {
     struct Input {
         let reloadTrigger: Observable<Void>
+        let pagingTrigger: Observable<Void>
     }
     struct Output {
         let reloadResponse: Observable<[ProductResponse]>
+        let pagingResponse: Observable<[ProductResponse]>
     }
 }
