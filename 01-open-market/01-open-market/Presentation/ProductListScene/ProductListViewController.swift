@@ -28,6 +28,7 @@ final class ProductListViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, ProductResponse>?
     private let disposeBag: DisposeBag = DisposeBag()
+    private var isPaging: Bool = false
     
     var viewModel: ProductListViewModel?
     
@@ -59,9 +60,15 @@ final class ProductListViewController: UIViewController {
             .map { _ in }
             .asObservable()
         
+        let pagingTrigger = productsCollectionView.rx
+            .reachedBottom()
+            .skip(1)
+            .asObservable()
+        
         let output = viewModel.transform(
             input: .init(
-                reloadTrigger: reloadTrigger
+                reloadTrigger: reloadTrigger,
+                pagingTrigger: pagingTrigger
             )
         )
         
@@ -74,6 +81,12 @@ final class ProductListViewController: UIViewController {
                         refresh.endRefreshing()
                     }
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        output.pagingResponse
+            .subscribe(onNext: { [weak self] data in
+                self?.appendToSnapShot(with: data)
             })
             .disposed(by: disposeBag)
     }
@@ -97,6 +110,13 @@ final class ProductListViewController: UIViewController {
         snapshot.appendSections([.productList])
         snapshot.appendItems(data)
         dataSource?.apply(snapshot, animatingDifferences: true)
+    }
+    
+    private func appendToSnapShot(with data: [ProductResponse]) {
+        guard let dataSource = dataSource else { return }
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(data, toSection: .productList)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     private func initializeDataSource() {
@@ -224,5 +244,26 @@ extension ProductListViewController: UICollectionViewDelegate {
         if let product = cell?.viewModel?.identifier {
             presentProductEditView(style: .edit(productIdentifier: product))
         }
+    }
+}
+
+
+public extension Reactive where Base: UIScrollView {
+    /**
+     Shows if the bottom of the UIScrollView is reached.
+     - parameter offset: A threshhold indicating the bottom of the UIScrollView.
+     - returns: ControlEvent that emits when the bottom of the base UIScrollView is reached.
+     */
+    func reachedBottom(offset: CGFloat = 0.0) -> ControlEvent<Void> {
+        let source = contentOffset.map { contentOffset in
+            let visibleHeight = self.base.frame.height - self.base.contentInset.top - self.base.contentInset.bottom
+            let y = contentOffset.y + self.base.contentInset.top
+            let threshold = max(offset, self.base.contentSize.height - visibleHeight)
+            return y >= threshold
+        }
+            .distinctUntilChanged()
+            .filter { $0 }
+            .map { _ in () }
+        return ControlEvent(events: source)
     }
 }
