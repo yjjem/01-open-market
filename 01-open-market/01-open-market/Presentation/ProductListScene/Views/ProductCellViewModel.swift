@@ -14,6 +14,7 @@ struct ProductCellViewModel {
     let currency: Currency
     let stock: Int
     let thumbnail: String
+    let description: String
 }
 
 extension ProductCellViewModel {
@@ -23,7 +24,8 @@ extension ProductCellViewModel {
             price: self.price,
             discount: self.discount,
             currency: self.currency,
-            stock: self.stock
+            stock: self.stock,
+            description: self.description
         )
     }
 }

@@ -170,6 +170,7 @@ final class ProductDetailsViewController: UIViewController {
         priceNameView.text = data.price.description
         discountNameView.text = data.discount.description
         stockNameView.text = data.stock.description
+        productDescriptionTextView.text = data.description
         
         switch data.currency {
         case .KRW:
@@ -344,8 +345,10 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
         }
         
         if indexPath.item == 0 {
-            cell.backgroundColor = .systemRed
-            cell.imageView.image = UIImage(named: "noImage")
+            cell.backgroundColor = .systemGray4
+            cell.tintColor = .systemPurple
+            let addImage = UIImage(named: "plusImage")
+            cell.imageView.image = addImage
             return cell
         }
         

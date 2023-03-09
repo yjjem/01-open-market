@@ -20,7 +20,7 @@ struct ProductResponse: Decodable, Hashable {
     let createdDate: String
     let issuedDate: String
     let vendorName: String?
-    let description: String?
+    let description: String
     let images: [ProductImage]?
     let vendors: Vendor?
     let uuid: UUID = UUID()

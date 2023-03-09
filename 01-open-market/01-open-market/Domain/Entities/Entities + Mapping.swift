@@ -20,7 +20,8 @@ extension ProductResponse {
             price: self.price,
             discount: self.discountedPrice,
             currency: self.currency,
-            stock: self.stock
+            stock: self.stock,
+            description: self.description
         )
     }
     
@@ -31,7 +32,8 @@ extension ProductResponse {
             discount: self.discountedPrice,
             currency: self.currency,
             stock: self.stock,
-            thumbnail: self.thumbnail
+            thumbnail: self.thumbnail,
+            description: self.description
         )
     }
 }

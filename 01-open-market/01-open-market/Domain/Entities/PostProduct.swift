@@ -13,4 +13,5 @@ struct PostProduct: Encodable {
     let discount: Double
     let currency: Currency
     let stock: Int
+    let description: String
 }
