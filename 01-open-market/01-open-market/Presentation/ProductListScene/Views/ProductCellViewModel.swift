@@ -8,6 +8,7 @@
 import Foundation
 
 struct ProductCellViewModel {
+    let identifier: Int
     let name: String
     let price: Double
     let discount: Double
@@ -18,8 +19,9 @@ struct ProductCellViewModel {
 }
 
 extension ProductCellViewModel {
-    func asPostProduct() -> PostProduct {
-        return PostProduct(
+    func asPostProduct() -> PostableProduct {
+        return PostableProduct(
+            identifier: self.identifier,
             name: self.name,
             price: self.price,
             discount: self.discount,

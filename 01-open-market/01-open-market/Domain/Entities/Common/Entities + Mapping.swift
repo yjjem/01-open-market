@@ -3,9 +3,9 @@
 //  01-open-market
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
-    
 
-import Foundation
+
+import UIKit
 
 extension ProductListResponse {
     func asProducts() -> [ProductResponse] {
@@ -14,8 +14,9 @@ extension ProductListResponse {
 }
 
 extension ProductResponse {
-    func asPostProduct() -> PostProduct {
-        return PostProduct(
+    func asPostProduct() -> PostableProduct {
+        return PostableProduct(
+            identifier: self.identifier,
             name: self.name,
             price: self.price,
             discount: self.discountedPrice,
@@ -27,6 +28,7 @@ extension ProductResponse {
     
     func asProductCellViewModel() -> ProductCellViewModel {
         return ProductCellViewModel(
+            identifier: self.identifier,
             name: self.name,
             price: self.price,
             discount: self.discountedPrice,

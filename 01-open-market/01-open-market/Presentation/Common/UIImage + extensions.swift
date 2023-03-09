@@ -22,7 +22,7 @@ extension UIImageView {
     func setImage(with url: String) {
         let cacheKey = NSString(string: url)
         
-        if let cacheImage = CacheManager.imagesCache.object(forKey: cacheKey) {
+        if let cacheImage = CacheManager.thumbnailCache.object(forKey: cacheKey) {
             self.image = cacheImage
             return
         }
@@ -35,7 +35,7 @@ extension UIImageView {
                 }
                 DispatchQueue.main.async {
                     guard let image = UIImage(data: data) else { return }
-                    CacheManager.imagesCache.setObject(image, forKey: cacheKey)
+                    CacheManager.thumbnailCache.setObject(image, forKey: cacheKey)
                     self.image = UIImage(data: data)
                 }
             }

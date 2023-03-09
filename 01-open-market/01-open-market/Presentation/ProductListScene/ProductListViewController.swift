@@ -189,7 +189,7 @@ final class ProductListViewController: UIViewController {
     private func presentProductEditView(style: ProductDetailsViewModel.Style) {
         let view = ProductDetailsViewController()
         let service = MarketService()
-        let useCase = ProductListUseCase(service: service)
+        let useCase = ProductDetailsUseCase(service: service)
         view.viewModel = ProductDetailsViewModel(presentingStyle: style, useCase: useCase)
         navigationController?.pushViewController(view, animated: true)
     }
@@ -221,8 +221,8 @@ extension ProductListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? ProductCell
-        if let product = cell?.viewModel?.asPostProduct() {
-            presentProductEditView(style: .edit(product: product))
+        if let product = cell?.viewModel?.identifier {
+            presentProductEditView(style: .edit(productIdentifier: product))
         }
     }
 }

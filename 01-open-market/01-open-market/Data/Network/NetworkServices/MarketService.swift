@@ -35,6 +35,24 @@ final class MarketService: MarketServiceType {
             }
         }
     }
+    
+    func retrieveProductDetails(identifier: Int) -> Observable<ProductDetailsResponse> {
+        let parameters = ProductDetailsRequest(productIdentifier: identifier)
+        return Observable.create { [weak self] emitter in
+            let task = self?.network.request(parameters: parameters, completion: { response in
+                switch response {
+                case .success(let data):
+                    emitter.onNext(data)
+                case .failure(let error):
+                    emitter.onError(error)
+                }
+            })
+            return Disposables.create {
+                task?.cancel()
+            }
+        }
+
+    }
 }
 
 fileprivate struct PagingManager {

@@ -25,6 +25,29 @@ final class ProductImageCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    func asImagePickerButton(selector: Selector) {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.backgroundColor = .systemGray3
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: selector, for: .touchUpInside)
+        contentView.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            button.topAnchor.constraint(equalTo: contentView.topAnchor),
+            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+    
     private func combineViews() {
         addSubview(imageView)
     }

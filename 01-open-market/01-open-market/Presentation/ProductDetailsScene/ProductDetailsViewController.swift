@@ -9,10 +9,6 @@ import UIKit
 import RxSwift
 
 final class ProductDetailsViewController: UIViewController {
-    enum Style {
-        case post
-        case edit
-    }
     
     // MARK: View(s)
     private let imagePicker: UIImagePickerController = {
@@ -63,6 +59,7 @@ final class ProductDetailsViewController: UIViewController {
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
         stack.alignment = .fill
+        stack.spacing = 10
         return stack
     }()
     private let detailDataStackView: UIStackView = {
@@ -83,11 +80,17 @@ final class ProductDetailsViewController: UIViewController {
     }()
     private let productDescriptionTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .systemGreen
-        textView.font = UIFont(name: "ArialHebrew", size: 20)
         textView.isEditable = false
         textView.isScrollEnabled = true
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.backgroundColor = .systemGray4
+        textView.font = UIFont(name: "ArialHebrew", size: 20)
+        textView.textContainerInset = .init(
+            top: 15,
+            left: 15,
+            bottom: 15,
+            right: 15
+        )
         return textView
     }()
     
@@ -104,8 +107,14 @@ final class ProductDetailsViewController: UIViewController {
         combineViews()
         configureViewConstraints()
         configureNavigationItems()
+        configureProductImagesCollectionView()
         configureInitialProductEditability()
         bindViewModel()
+    }
+    
+    // MARK: Private Function(s)
+    
+    private func configureProductImagesCollectionView() {
         productImagesCollectionView.register(
             ProductImageCell.self,
             forCellWithReuseIdentifier: "cell"
@@ -114,8 +123,6 @@ final class ProductDetailsViewController: UIViewController {
         productImagesCollectionView.dataSource = self
         imagePicker.delegate = self
     }
-    
-    // MARK: Private Function(s)
     
     private func configureInitialProductEditability() {
         guard let viewModel = viewModel else { return }
@@ -151,9 +158,8 @@ final class ProductDetailsViewController: UIViewController {
         )
         
         output.initialSetUpResponse
-            .filter { $0 != nil }
             .subscribe(onNext: { [weak self] data in
-                self?.setString(data: data)
+                self?.fillTextFields(using: data)
             })
             .disposed(by: disposeBag)
         
@@ -164,19 +170,24 @@ final class ProductDetailsViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func setString(data: PostProduct?) {
-        guard let data = data else { return }
-        productNameView.text = data.name
-        priceNameView.text = data.price.description
-        discountNameView.text = data.discount.description
-        stockNameView.text = data.stock.description
-        productDescriptionTextView.text = data.description
+    private func fillTextFields(using data: RepresentableProductDetails) {
+        // images
         
-        switch data.currency {
-        case .KRW:
-            currencySelectorView.selectedSegmentIndex = 0
-        case .USD:
-            currencySelectorView.selectedSegmentIndex = 1
+        DispatchQueue.main.async {
+            self.selectedImages = data.images
+            self.productNameView.text = data.name
+            self.priceNameView.text = data.price.description
+            self.discountNameView.text = data.discount.description
+            self.stockNameView.text = data.stock.description
+            self.productDescriptionTextView.text = data.description
+            
+            switch data.currency {
+            case .KRW:
+                self.currencySelectorView.selectedSegmentIndex = 0
+            case .USD:
+                self.currencySelectorView.selectedSegmentIndex = 1
+            }
+            self.productImagesCollectionView.reloadData()
         }
     }
     
@@ -216,8 +227,8 @@ final class ProductDetailsViewController: UIViewController {
             action: #selector(didTapEditButton)
         )
         switch viewModel.presentingStyle {
-        case .edit(product: let product):
-            navigationItem.title = product.name
+        case .edit(_):
+            navigationItem.title = "상품 조회"
             navigationItem.rightBarButtonItem = editButton
         case .post:
             let doneButton = createDoneButton()
@@ -294,16 +305,7 @@ final class ProductDetailsViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            priceNameView.trailingAnchor
-                .constraint(
-                    equalTo: currencySelectorView.leadingAnchor,
-                    constant: -10
-                ),
-            currencySelectorView.leadingAnchor
-                .constraint(
-                    equalTo: priceNameView.trailingAnchor,
-                    constant: 20
-                ),
+
             currencySelectorView.topAnchor
                 .constraint(
                     equalTo: priceStackView.topAnchor
@@ -330,13 +332,16 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        return 1 + selectedImages.count
+        let count = selectedImages.count
+        
+        return count + 1
     }
     
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+        
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: "cell",
             for: indexPath
@@ -344,18 +349,20 @@ extension ProductDetailsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if indexPath.item == 0 {
-            cell.backgroundColor = .systemGray4
-            cell.tintColor = .systemPurple
-            let addImage = UIImage(named: "plusImage")
-            cell.imageView.image = addImage
+        if indexPath.item == selectedImages.count {
+            cell.asImagePickerButton(selector: #selector(selectImage))
             return cell
         }
         
         cell.backgroundColor = .systemGray5
-        cell.imageView.image = selectedImages[indexPath.item - 1]
+        
+        cell.imageView.image = selectedImages[indexPath.item]
         
         return cell
+    }
+    
+    @objc private func selectImage() {
+        present(imagePicker, animated: true, completion: nil)
     }
 }
 

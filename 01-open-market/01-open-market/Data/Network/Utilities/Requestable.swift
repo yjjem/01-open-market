@@ -12,7 +12,7 @@ protocol Requestable {
     
     var host: URL? { get }
     var path: String { get }
-    var queries: [String: String] { get }
+    var queries: [String: String]? { get }
     var headers: [String: String]? { get }
     var method: HTTPMethod { get }
     var url: URL? { get }
@@ -21,7 +21,9 @@ protocol Requestable {
 extension Requestable {
     var url: URL? {
         var components = host.flatMap { URLComponents(string: $0.absoluteString) }
-        components?.queryItems = queries.map { URLQueryItem(name: $0, value: $1)}
+        if let queries = queries {
+            components?.queryItems = queries.map { URLQueryItem(name: $0, value: $1)}
+        }
         components?.path = path
         return components?.url
     }
@@ -48,10 +50,25 @@ struct ProductListRequest: Requestable {
     var path: String {
         return "/api/products"
     }
-    var queries: [String : String] {
+    var queries: [String : String]? {
         return [
             "page_no" : "\(pageNumber)",
             "items_per_page" : "\(itemsLimit)"
         ]
+    }
+}
+
+struct ProductDetailsRequest: Requestable {
+    typealias Response = ProductDetailsResponse
+
+    let productIdentifier: Int
+    var queries: [String : String]? = nil
+    var headers: [String : String]? = nil
+    var method: HTTPMethod = .get
+    var host: URL? {
+        return URL(string: "https://openmarket.yagom-academy.kr")
+    }
+    var path: String {
+        return "/api/products/\(productIdentifier)"
     }
 }

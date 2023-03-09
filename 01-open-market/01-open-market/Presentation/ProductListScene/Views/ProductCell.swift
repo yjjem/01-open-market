@@ -86,7 +86,7 @@ final class ProductCell: UICollectionViewCell {
         stockLabel.text = "수량: \(String(viewModel.stock))"
     }
     
-    // MARK: Privat Function(s)
+    // MARK: Private Function(s)
     
     private func configureViewStyles() {
         contentView.backgroundColor = .tertiarySystemFill
@@ -125,7 +125,9 @@ final class ProductCell: UICollectionViewCell {
                     equalTo: contentView.bottomAnchor,
                     constant: -10
                 ),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+            imageView.widthAnchor.constraint(
+                equalTo: imageView.heightAnchor
+            ),
         ])
     }
 }

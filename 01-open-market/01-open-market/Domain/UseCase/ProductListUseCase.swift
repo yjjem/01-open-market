@@ -23,15 +23,9 @@ final class ProductListUseCase: ProductListUseCaseType {
     
     func retrieveProductList() -> Observable<[ProductResponse]> {
         return service.retrieveProductsData(reload: false)
-            .flatMap { list in
-                Observable.just(list)
-            }
     }
 
     func reloadProductList() -> Observable<[ProductResponse]> {
         return service.retrieveProductsData(reload: true)
-            .flatMap { list in
-                Observable.just(list)
-            }
     }
 }

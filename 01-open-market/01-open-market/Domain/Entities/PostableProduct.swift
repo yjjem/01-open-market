@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct PostProduct: Encodable {
+struct PostableProduct  {
+    let identifier: Int
     let name: String
     let price: Double
     let discount: Double
