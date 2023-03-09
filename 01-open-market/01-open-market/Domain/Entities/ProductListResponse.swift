@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ProductList: Decodable {
+struct ProductListResponse: Decodable {
     let pageNumber: Int
     let itemsPerPage: Int
     let totalCount: Int
     let offset: Int
     let limit: Int
-    var pages: [Product]
+    var pages: [ProductResponse]
     let lastPage: Int
     let hasNext: Bool
     let hasPrevious: Bool

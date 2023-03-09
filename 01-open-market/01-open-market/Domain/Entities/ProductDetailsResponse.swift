@@ -1,5 +1,5 @@
 //
-//  Product.swift
+//  ProductDetailsResponse.swift
 //  01-open-market
 //
 //  Copyright (c) 2023 Jeremy All rights reserved.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Product: Decodable, Hashable {
+struct ProductDetailsResponse: Decodable, Hashable {
     let identifier: Int
     let vendorIdentifier: Int
     let name: String
@@ -19,10 +19,9 @@ struct Product: Decodable, Hashable {
     let stock: Int
     let createdDate: String
     let issuedDate: String
-    let vendorName: String?
-    let description: String?
-    let images: [ProductImage]?
-    let vendors: Vendor?
+    let description: String
+    let images: [ProductImage]
+    let vendors: Vendor
     let uuid: UUID = UUID()
     
     private enum CodingKeys: String, CodingKey {
@@ -37,7 +36,6 @@ struct Product: Decodable, Hashable {
         case stock
         case createdDate = "createdAt"
         case issuedDate = "issuedAt"
-        case vendorName
         case description
         case images
         case vendors
