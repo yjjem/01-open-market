@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 final class CacheManager {
-    static let imagesCache = NSCache<NSString, UIImage>()
+    static let thumbnailCache = NSCache<NSString, UIImage>()
+    static let productImagesCache = NSCache<NSString, UIImage>()
     
     private init() { }
 }

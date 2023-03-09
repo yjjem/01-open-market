@@ -54,6 +54,8 @@ final class ProductCell: UICollectionViewCell {
         return stackView
     }()
     
+    var viewModel: ProductCellViewModel?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -67,6 +69,7 @@ final class ProductCell: UICollectionViewCell {
     }
 
     override func prepareForReuse() {
+        super.prepareForReuse()
         imageView.image = nil
         nameLabel.text = nil
         priceLabel.text = nil
@@ -75,14 +78,15 @@ final class ProductCell: UICollectionViewCell {
 
     // MARK: Function(s)
     
-    func setUpWith(product: Product) {
-        imageView.setImage(with: product.thumbnail)
-        nameLabel.text = product.name
-        priceLabel.text = "가격: \(String(product.price)) \(product.currency.rawValue)"
-        stockLabel.text = "수량: \(String(product.stock))"
+    func configureUsingViewModel() {
+        guard let viewModel = viewModel else { return }
+        imageView.setImage(with: viewModel.thumbnail)
+        nameLabel.text = viewModel.name
+        priceLabel.text = "가격: \(String(viewModel.price)) \(viewModel.currency.rawValue)"
+        stockLabel.text = "수량: \(String(viewModel.stock))"
     }
     
-    // MARK: Privat Function(s)
+    // MARK: Private Function(s)
     
     private func configureViewStyles() {
         contentView.backgroundColor = .tertiarySystemFill
@@ -121,7 +125,9 @@ final class ProductCell: UICollectionViewCell {
                     equalTo: contentView.bottomAnchor,
                     constant: -10
                 ),
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+            imageView.widthAnchor.constraint(
+                equalTo: imageView.heightAnchor
+            ),
         ])
     }
 }

@@ -26,7 +26,7 @@ final class ProductListViewController: UIViewController {
         return collectionView
     }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Product>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, ProductResponse>?
     private let disposeBag: DisposeBag = DisposeBag()
     
     var viewModel: ProductListViewModel?
@@ -70,7 +70,7 @@ final class ProductListViewController: UIViewController {
                 self?.updateSnapShot(with: data)
                 DispatchQueue.main.async {
                     if let refresh = self?.productsCollectionView.refreshControl,
-                        refresh.isRefreshing {
+                       refresh.isRefreshing {
                         refresh.endRefreshing()
                     }
                 }
@@ -83,6 +83,7 @@ final class ProductListViewController: UIViewController {
         configureConstraints()
         initializeDataSource()
         configureCollectionViewRefreshControl()
+        productsCollectionView.delegate = self
     }
     
     private func configureCollectionViewRefreshControl() {
@@ -91,8 +92,8 @@ final class ProductListViewController: UIViewController {
         productsCollectionView.refreshControl = refreshControl
     }
     
-    private func updateSnapShot(with data: [Product]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
+    private func updateSnapShot(with data: [ProductResponse]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, ProductResponse>()
         snapshot.appendSections([.productList])
         snapshot.appendItems(data)
         dataSource?.apply(snapshot, animatingDifferences: true)
@@ -100,7 +101,7 @@ final class ProductListViewController: UIViewController {
     
     private func initializeDataSource() {
         let registration = createCellRegistration()
-        dataSource = UICollectionViewDiffableDataSource<Section, Product>(
+        dataSource = UICollectionViewDiffableDataSource<Section, ProductResponse>(
             collectionView: productsCollectionView
         ) { collectionView, indexPath, data in
             return collectionView.dequeueConfiguredReusableCell(
@@ -113,10 +114,12 @@ final class ProductListViewController: UIViewController {
     }
     
     private func createCellRegistration()
-    -> UICollectionView.CellRegistration<ProductCell, Product> {
-        let registration = UICollectionView.CellRegistration<ProductCell, Product> {
+    -> UICollectionView.CellRegistration<ProductCell, ProductResponse> {
+        let registration = UICollectionView.CellRegistration<ProductCell, ProductResponse> {
             cell, indexPath, data in
-            cell.setUpWith(product: data)
+            let productCellViewModel = data.asProductCellViewModel()
+            cell.viewModel = productCellViewModel
+            cell.configureUsingViewModel()
         }
         return registration
     }
@@ -142,13 +145,20 @@ final class ProductListViewController: UIViewController {
             target: self,
             action: #selector(logoDidTapped)
         )
+        let rightButton = UIBarButtonItem(
+            image: .add,
+            style: .plain,
+            target: self,
+            action: #selector(didTapAddProductButton)
+        )
         let attributes: [NSAttributedString.Key : Any] = [
             .font: UIFont.boldSystemFont(ofSize: 16)
         ]
         leftButton.setTitleTextAttributes(attributes, for: .normal)
         leftButton.tintColor = .black
-        leftButton.action = #selector(logoDidTapped)
+        rightButton.tintColor = .black
         navigationItem.leftBarButtonItem = leftButton
+        navigationItem.rightBarButtonItem = rightButton
     }
     
     private func combineViews() {
@@ -176,6 +186,19 @@ final class ProductListViewController: UIViewController {
         ])
     }
     
+    private func presentProductEditView(style: ProductDetailsViewModel.Style) {
+        let view = ProductDetailsViewController()
+        let service = MarketService()
+        let useCase = ProductDetailsUseCase(service: service)
+        view.viewModel = ProductDetailsViewModel(presentingStyle: style, useCase: useCase)
+        navigationController?.pushViewController(view, animated: true)
+    }
+    
+    @objc
+    private func didTapAddProductButton() {
+        presentProductEditView(style: .post)
+    }
+    
     @objc
     private func startRefreshControl() { }
     
@@ -190,6 +213,16 @@ final class ProductListViewController: UIViewController {
             productsCollectionView.layoutStyle = .grid
         } else {
             productsCollectionView.layoutStyle = .vertical
+        }
+    }
+}
+
+extension ProductListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? ProductCell
+        if let product = cell?.viewModel?.identifier {
+            presentProductEditView(style: .edit(productIdentifier: product))
         }
     }
 }

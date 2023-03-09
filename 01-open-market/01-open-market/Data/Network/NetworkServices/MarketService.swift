@@ -16,7 +16,7 @@ final class MarketService: MarketServiceType {
         self.network = network
     }
     
-    func retrieveProductsData(reload: Bool = false) -> Observable<[Product]> {
+    func retrieveProductsData(reload: Bool = false) -> Observable<[ProductResponse]> {
         if reload {
             pagingManager.resetPage()
         }
@@ -34,6 +34,24 @@ final class MarketService: MarketServiceType {
                 task?.cancel()
             }
         }
+    }
+    
+    func retrieveProductDetails(identifier: Int) -> Observable<ProductDetailsResponse> {
+        let parameters = ProductDetailsRequest(productIdentifier: identifier)
+        return Observable.create { [weak self] emitter in
+            let task = self?.network.request(parameters: parameters, completion: { response in
+                switch response {
+                case .success(let data):
+                    emitter.onNext(data)
+                case .failure(let error):
+                    emitter.onError(error)
+                }
+            })
+            return Disposables.create {
+                task?.cancel()
+            }
+        }
+
     }
 }
 
